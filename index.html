@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Smart Attendance System</title>
-    <link rel="stylesheet" href="style.css">
+  <title>SHERIFF ATTENDANCE APP</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Smart Attendance System</h1>
-<p id="date"></p>
+<h1>ATTENDANCE MANAGER</h1>
 
-<input type="text" id="search" placeholder="Search Student" onkeyup="searchStudent()">
+<div id="STUDENT LIST"></div>
 
-<div id="studentList"></div>
+<button onclick="saveAttendance()">Save ATTENDANCE</button>
+<button onclick="viewAttendance()">VIEW SAVED</button>
+<button onclick="shareAttendance()">SHARE</button>
 
-<button onclick="calculateAttendance()">Submit Attendance</button>
+<h2 id="SUMMARY"></h2>
 
-<h3 id="result"></h3>
+<div id="SAVED DATA"></div>
 
 <script src="script.js"></script>
 </body>
