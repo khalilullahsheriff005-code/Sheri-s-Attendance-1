@@ -1,46 +1,34 @@
 body {
-    font-family: Arial;
-    text-align: center;
-    background-color: #f2f2f2;
+  font-family: Arial;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
 
 h1 {
-    color: darkblue;
+  margin-bottom: 20px;
 }
 
-#search {
-    padding: 8px;
-    width: 250px;
-    margin: 15px;
-    font-size: 16px;
-}
-
-#studentList {
-    margin: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-label {
-    display: block;
-    margin: 5px;
-    font-size: 18px;
+.student {
+  background: white;
+  color: black;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 10px;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: green;
-    color: white;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
+  padding: 10px 15px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #ff9800;
+  color: white;
+  font-weight: bold;
 }
 
 button:hover {
-    background-color: darkgreen;
-}
-
-#result {
-    margin-top: 20px;
-    font-weight: bold;
+  background: #e68900;
 }
