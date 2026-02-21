@@ -25,11 +25,19 @@ let students = [
 "MUNEESWARAN S","MURUGANANDHAM M R"
 ];
 
+let colors = [
+"#ff6b6b","#6bcB77","#4d96ff","#f06595",
+"#845ef7","#ffa94d","#20c997","#fab005"
+];
+
 let studentList = document.getElementById("studentList");
 
 students.forEach((name, index) => {
+
+    let color = colors[index % colors.length];
+
     studentList.innerHTML += `
-    <div class="student-card">
+    <div class="student-card" style="background:${color}; color:white;">
         <span>${name}</span>
         <select id="status-${index}">
             <option value="Present">Present</option>
@@ -42,56 +50,26 @@ students.forEach((name, index) => {
 
 function saveAttendance() {
 
-    let attendance = {};
     let present = 0;
-
-    students.forEach((name, index) => {
-        let status = document.getElementById(`status-${index}`).value;
-        attendance[name] = status;
-        if(status === "Present") present++;
-    });
-
-    localStorage.setItem("attendanceData", JSON.stringify(attendance));
-
-    document.getElementById("result").innerHTML =
-    `Attendance Saved! Present: ${present} / ${students.length}`;
-}
-
-function viewAttendance() {
-
-    let data = JSON.parse(localStorage.getItem("attendanceData"));
+    let absent = 0;
+    let onDuty = 0;
     let output = "";
 
-    if(!data){
-        output = "No saved attendance found.";
-    } else {
-        for(let name in data){
-            output += `${name} - ${data[name]} <br>`;
-        }
-    }
+    students.forEach((name, index) => {
+
+        let status = document.getElementById(`status-${index}`).value;
+
+        if(status === "Present") present++;
+        else if(status === "Absent") absent++;
+        else if(status === "On Duty") onDuty++;
+
+        output += `${name} - ${status} <br>`;
+    });
+
+    document.getElementById("summary").innerHTML =
+    `Total: ${students.length} | Present: ${present} | Absent: ${absent} | On Duty: ${onDuty}`;
 
     document.getElementById("savedData").innerHTML = output;
-}
 
-function shareAttendance() {
-
-    let data = JSON.parse(localStorage.getItem("attendanceData"));
-    if(!data){
-        alert("No attendance to share!");
-        return;
-    }
-
-    let text = "Attendance Report\n\n";
-    for(let name in data){
-        text += `${name} - ${data[name]}\n`;
-    }
-
-    if(navigator.share){
-        navigator.share({
-            title: "Attendance Report",
-            text: text
-        });
-    } else {
-        alert("Sharing not supported in this device.");
-    }
+    localStorage.setItem("attendanceData", output);
 }
