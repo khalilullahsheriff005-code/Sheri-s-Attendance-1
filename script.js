@@ -23,66 +23,108 @@ const students = [
 "MUNEESWARAN S","MURUGANANDHAM M R"
 ];
 
-const colors = ["#FF5733","#33FF57","#3357FF","#FF33A8","#FF8C33","#33FFF2"];
+const colors = ["#ff6b6b","#6bcB77","#4d96ff","#ff9f1c","#c77dff","#00b4d8"];
 
-function loadStudents(){
+function loadStudents() {
   const list = document.getElementById("studentList");
-  students.forEach((name,index)=>{
+  list.innerHTML = "";
+
+  students.forEach((name, index) => {
     const div = document.createElement("div");
-    div.className="student";
-    div.style.background = colors[index % colors.length];
+    div.className = "student";
+    div.style.backgroundColor = colors[index % colors.length];
+
     div.innerHTML = `
-      <b>${name}</b><br>
-      <label><input type="radio" name="${name}" value="Present"> Present</label>
-      <label><input type="radio" name="${name}" value="Absent"> Absent</label>
-      <label><input type="radio" name="${name}" value="On Duty"> On Duty</label>
+      ${name}<br>
+      <label><input type="radio" name="${name}" value="PRESENT"> PRESENT</label>
+      <label><input type="radio" name="${name}" value="ABSENT"> ABSENT</label>
+      <label><input type="radio" name="${name}" value="ON DUTY"> ON DUTY</label>
     `;
+
     list.appendChild(div);
   });
 }
 
-function saveAttendance(){
+function saveAttendance() {
   let attendance = {};
-  let present=0, absent=0, duty=0;
+  let present = 0, absent = 0, duty = 0;
 
-  students.forEach(name=>{
+  students.forEach(name => {
     const selected = document.querySelector(`input[name="${name}"]:checked`);
-    if(selected){
+    if (selected) {
       attendance[name] = selected.value;
-      if(selected.value=="Present") present++;
-      if(selected.value=="Absent") absent++;
-      if(selected.value=="On Duty") duty++;
+      if (selected.value === "PRESENT") present++;
+      if (selected.value === "ABSENT") absent++;
+      if (selected.value === "ON DUTY") duty++;
     }
   });
 
-  localStorage.setItem("attendance", JSON.stringify(attendance));
+  localStorage.setItem("attendanceData", JSON.stringify(attendance));
 
   document.getElementById("summary").innerText =
-    `Present: ${present} | Absent: ${absent} | On Duty: ${duty}`;
+    `TOTAL PRESENT: ${present} | TOTAL ABSENT: ${absent} | TOTAL ON DUTY: ${duty}`;
 }
 
-function viewAttendance(){
-  const data = JSON.parse(localStorage.getItem("attendance"));
+function viewAttendance() {
+  const data = JSON.parse(localStorage.getItem("attendanceData"));
   const savedDiv = document.getElementById("savedData");
-  savedDiv.innerHTML="";
+  savedDiv.innerHTML = "";
 
-  if(data){
-    for(let name in data){
-      savedDiv.innerHTML += `<p>${name} - ${data[name]}</p>`;
-    }
+  if (!data) {
+    savedDiv.innerHTML = "NO ATTENDANCE SAVED YET!";
+    return;
+  }
+
+  for (let name in data) {
+    savedDiv.innerHTML += `<p>${name} - ${data[name]}</p>`;
   }
 }
 
-function shareAttendance(){
-  const data = localStorage.getItem("attendance");
-  if(navigator.share){
+function clearAttendance() {
+  localStorage.removeItem("attendanceData");
+  document.getElementById("savedData").innerHTML = "";
+  document.getElementById("summary").innerText = "";
+  alert("ATTENDANCE CLEARED!");
+}
+
+function shareAttendance() {
+  const data = localStorage.getItem("attendanceData");
+  if (!data) {
+    alert("NO DATA TO SHARE");
+    return;
+  }
+
+  if (navigator.share) {
     navigator.share({
-      title: "Attendance",
+      title: "ATTENDANCE REPORT",
       text: data
     });
-  }else{
-    alert("Sharing not supported in this browser");
+  } else {
+    navigator.clipboard.writeText(data);
+    alert("ATTENDANCE COPIED!");
   }
 }
 
-loadStudents();
+function exportText() {
+  const data = localStorage.getItem("attendanceData");
+  if (!data) {
+    alert("NO DATA TO EXPORT");
+    return;
+  }
+
+  const blob = new Blob([data], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "attendance.txt";
+  link.click();
+}
+
+function showDate() {
+  const today = new Date().toLocaleDateString();
+  document.getElementById("todayDate").innerText = "DATE: " + today;
+}
+
+window.onload = function() {
+  loadStudents();
+  showDate();
+};
