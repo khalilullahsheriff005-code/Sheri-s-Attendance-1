@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Attendance App</title>
+  <meta charset="UTF-8">
+  <title>SMART ATTENDANCE MANAGER</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Attendance Manager</h1>
+<h1>ATTENDANCE APP</h1>
+<h3 id="TODAY DATE"></h3>
 
-<div id="studentList"></div>
+<div id="STUDENT LIST"></div>
 
-<button onclick="saveAttendance()">Save Attendance</button>
-<button onclick="viewAttendance()">View Saved</button>
-<button onclick="shareAttendance()">Share</button>
+<div class="BUTTONS">
+  <button onclick="saveAttendance()">SAVE ATTENDANCE</button>
+  <button onclick="viewAttendance()">VIEW SAVED</button>
+  <button onclick="clearAttendance()">CLEAR</button>
+  <button onclick="shareAttendance()">SHARE</button>
+  <button onclick="exportText()">EXPORT</button>
+</div>
 
-<h2 id="summary"></h2>
+<h2 id="SUMMARY"></h2>
 
-<div id="savedData"></div>
+<div id="SAVED DATA"></div>
+
+<footer>
+  <strong>MADE BY SHERIFF</strong>
+</footer>
 
 <script src="script.js"></script>
 </body>
