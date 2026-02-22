@@ -1,49 +1,31 @@
 body {
   font-family: Arial;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  padding: 20px;
-  text-align: center;
+  background: linear-gradient(135deg,#1e3c72,#2a5298);
   color: white;
-}
-
-h1 {
-  font-size: 28px;
-  margin-bottom: 5px;
+  text-align: center;
+  padding: 20px;
 }
 
 .student {
-  padding: 12px;
+  padding: 10px;
   margin: 8px 0;
   border-radius: 10px;
-  color: white;
   font-weight: bold;
 }
 
-.buttons button {
-  padding: 10px 15px;
-  margin: 8px;
+button {
+  padding: 8px 15px;
+  margin: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
+  background: orange;
+  color: white;
   font-weight: bold;
   cursor: pointer;
-  background: #ff9800;
-  color: white;
-}
-
-.buttons button:hover {
-  background: #e68900;
-}
-
-#savedData {
-  margin-top: 20px;
-  text-align: left;
-  background: rgba(255,255,255,0.1);
-  padding: 10px;
-  border-radius: 10px;
 }
 
 footer {
-  margin-top: 40px;
-  font-size: 18px;
+  margin-top: 30px;
+  font-weight: bold;
   letter-spacing: 2px;
 }
